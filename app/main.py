@@ -90,7 +90,7 @@ async def upload_file(file: UploadFile = File(...)):
 @app.delete("/{filename}")
 def delete_file(filename: str):
     # Caminho completo do arquivo
-    file_path = UPLOAD_FOLDER / filename
+    file_path = os.path.join(UPLOAD_FOLDER, filename)
     
     # Verifica se o arquivo existe
     if not file_path.exists():
