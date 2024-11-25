@@ -93,12 +93,12 @@ def delete_file(filename: str):
     file_path = os.path.join(UPLOAD_FOLDER, filename)
     
     # Verifica se o arquivo existe
-    if not os.path.exists(file_path):
+    if not os.path.isfile(file_path):
         raise HTTPException(status_code=404, detail="File not found")
     
     # Apaga o arquivo
     try:
-        file_path.unlink()
+        os.remove(file_path)
         return {"message": f"File '{filename}' deleted successfully"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error deleting file: {e}")
