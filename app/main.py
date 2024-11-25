@@ -86,3 +86,19 @@ async def upload_file(file: UploadFile = File(...)):
         f.write(file.file.read())
 
     return {"filename": filename, "file_location": file_location}
+
+@app.delete("/{filename}")
+def delete_file(filename: str):
+    # Caminho completo do arquivo
+    file_path = UPLOAD_FOLDER / filename
+    
+    # Verifica se o arquivo existe
+    if not file_path.exists():
+        raise HTTPException(status_code=404, detail="File not found")
+    
+    # Apaga o arquivo
+    try:
+        file_path.unlink()
+        return {"message": f"File '{filename}' deleted successfully"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error deleting file: {e}")
