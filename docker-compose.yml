@@ -6,7 +6,7 @@ services:
     depends_on:
       - filesapi
     ports:
-      - "8081:8081"
+      - "8083:8083"
     volumes: # Volumes usados para fazer o proxy reverso, a config para rodar os sites ao mesmo tempo $      - /var/run/docker.sock:/tmp/docker.sock:ro
       - "./nginx/nginx.d:/etc/nginx/conf.d/"
       - "./nginx/nginx.conf:/etc/nginx/nginx.conf"
